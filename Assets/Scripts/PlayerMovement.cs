@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed = 10f;
     public float gravity = -9.81f;
 
+
     [Header("Camera")]
     public Transform cameraTransform;
 
@@ -17,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
 
     private Vector3 velocity;
+
+    public bool canMove = true;
 
 
     void Start()
@@ -34,6 +37,14 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
+        if (!canMove)
+        {
+            animator.SetFloat("Speed", 0);
+            if (controller.isGrounded && velocity.y < 0)velocity.y = -2f;
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
+            return;
+        }
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
