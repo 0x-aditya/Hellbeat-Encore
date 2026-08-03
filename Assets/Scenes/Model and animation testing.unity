@@ -253,7 +253,8 @@ MonoBehaviour:
   runSpeed: 5
   rotationSpeed: 10
   gravity: -9.81
-  cameraTransform: {fileID: 1827788893}
+  cameraTransform: {fileID: 1977600650}
+  canMove: 1
 --- !u!143 &1290861614
 CharacterController:
   m_ObjectHideFlags: 0
@@ -296,6 +297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea51319f7f630ec4aa8a4a14a92bf0cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
+  isAttacking: 0
+  attackCooldown: 0.25
 --- !u!1 &1321269565
 GameObject:
   m_ObjectHideFlags: 0
