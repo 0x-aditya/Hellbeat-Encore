@@ -45,14 +45,13 @@ public class PlayerMovement : MonoBehaviour
             controller.Move(velocity * Time.deltaTime);
             return;
         }
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
 
         Vector3 inputDirection = new Vector3(horizontal, 0f, vertical).normalized;
 
 
-        // Camera-relative movement
         Vector3 cameraForward = cameraTransform.forward;
         Vector3 cameraRight = cameraTransform.right;
 
@@ -69,6 +68,8 @@ public class PlayerMovement : MonoBehaviour
             cameraForward * vertical +
             cameraRight * horizontal;
 
+        moveDirection.Normalize();
+
 
 
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
@@ -84,22 +85,14 @@ public class PlayerMovement : MonoBehaviour
         // Smooth player rotation
         if (moveDirection.magnitude > 0.1f)
         {
-            Quaternion targetRotation =
-                Quaternion.LookRotation(moveDirection);
+            Quaternion targetRotation =Quaternion.LookRotation(moveDirection);
 
 
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                targetRotation,
-                rotationSpeed * Time.deltaTime
-            );
+            transform.rotation = Quaternion.RotateTowards(transform.rotation,targetRotation,rotationSpeed * 100 * Time.deltaTime);
         }
 
 
-        animator.SetFloat(
-            "Speed",
-            moveDirection.magnitude * currentSpeed
-        );
+        animator.SetFloat("Speed",moveDirection.magnitude * currentSpeed);
 
 
         // Gravity
@@ -111,8 +104,6 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(
-            velocity * Time.deltaTime
-        );
+        controller.Move(velocity * Time.deltaTime);
     }
 }
