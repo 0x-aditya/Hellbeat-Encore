@@ -40,36 +40,27 @@ public class PlayerMovement : MonoBehaviour
         if (!canMove)
         {
             animator.SetFloat("Speed", 0);
-            if (controller.isGrounded && velocity.y < 0)velocity.y = -2f;
+
+            if (controller.isGrounded && velocity.y < 0)
+                velocity.y = -2f;
+
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
             return;
         }
+
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
 
-        Vector3 inputDirection = new Vector3(horizontal, 0f, vertical).normalized;
-
-
-        Vector3 cameraForward = cameraTransform.forward;
-        Vector3 cameraRight = cameraTransform.right;
-
-
-        cameraForward.y = 0;
-        cameraRight.y = 0;
-
-
-        cameraForward.Normalize();
-        cameraRight.Normalize();
-
-
+        // Normal WASD movement relative to player
         Vector3 moveDirection =
-            cameraForward * vertical +
-            cameraRight * horizontal;
+            transform.forward * vertical +
+            transform.right * horizontal;
+
 
         moveDirection.Normalize();
-
 
 
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
@@ -78,21 +69,31 @@ public class PlayerMovement : MonoBehaviour
 
 
         controller.Move(
-            moveDirection.normalized * currentSpeed * Time.deltaTime
+            moveDirection * currentSpeed * Time.deltaTime
         );
 
 
-        // Smooth player rotation
         if (moveDirection.magnitude > 0.1f)
         {
-            Quaternion targetRotation =Quaternion.LookRotation(moveDirection);
+            // Only rotate when moving forward
+            if (vertical > 0)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
 
-
-            transform.rotation = Quaternion.RotateTowards(transform.rotation,targetRotation,rotationSpeed * 100 * Time.deltaTime);
+                transform.rotation = Quaternion.RotateTowards(
+                    transform.rotation,
+                    targetRotation,
+                    rotationSpeed * 100 * Time.deltaTime
+                );
+            }
         }
 
 
-        animator.SetFloat("Speed",moveDirection.magnitude * currentSpeed);
+        // Animation speed
+        animator.SetFloat(
+            "Speed",
+            moveDirection.magnitude * currentSpeed
+        );
 
 
         // Gravity
