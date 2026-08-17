@@ -16,8 +16,8 @@ namespace ScriptLibrary.Inputs
             PlayerMovementAction.canceled -= OnInput;
         }
 
-        protected virtual void OnKeyDown(){}
-        protected virtual void OnKeyUp(){}
+        protected abstract void OnKeyDown();
+        protected abstract void OnKeyUp();
 
         protected override void OnInput(InputAction.CallbackContext context)
         {

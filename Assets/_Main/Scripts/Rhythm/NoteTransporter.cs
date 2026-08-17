@@ -15,6 +15,7 @@ public class NoteTransporter : MonoBehaviour
 
     public void OnEnable()
     {
+        print("Enabling NoteTransporter");
         RhythmHandler.Instance.OnSpawn += SpawnNote;
     }
 
@@ -25,6 +26,7 @@ public class NoteTransporter : MonoBehaviour
 
     private void SpawnNote()
     {
+        print("Spawning note");
         GameObject newNote = Instantiate(notePrefab, spawnPoint.position, spawnPoint.rotation, canvasTransform);
         _currentNotes.Add(newNote);
 
@@ -44,12 +46,12 @@ public class NoteTransporter : MonoBehaviour
         float exitDuration = travelTime;
         Vector2 startPosition = note.transform.position;
  
-        double startDspTime = AudioSettings.dspTime;
+        double startDspTime = Time.time;
         double arrivalDspTime = startDspTime + travelTime;
  
-        while (AudioSettings.dspTime < arrivalDspTime)
+        while (Time.time < arrivalDspTime)
         {
-            float t = (float)((AudioSettings.dspTime - startDspTime) / travelTime);
+            float t = (float)((Time.time - startDspTime) / travelTime);
             note.transform.position = Vector2.Lerp(startPosition, targetPosition, t);
             yield return null;
         }
@@ -57,12 +59,12 @@ public class NoteTransporter : MonoBehaviour
         note.transform.position = targetPosition;
  
         Vector3 legTwoStart = note.transform.position;
-        double legTwoStartDspTime = AudioSettings.dspTime;
+        double legTwoStartDspTime = Time.time;
         double legTwoArrivalDspTime = legTwoStartDspTime + exitDuration;
  
-        while (AudioSettings.dspTime < legTwoArrivalDspTime)
+        while (Time.time < legTwoArrivalDspTime)
         {
-            float t = (float)((AudioSettings.dspTime - legTwoStartDspTime) / exitDuration);
+            float t = (float)((Time.time - legTwoStartDspTime) / exitDuration);
             note.transform.position = Vector3.Lerp(legTwoStart, finalDestination, t);
             yield return null;
         }
