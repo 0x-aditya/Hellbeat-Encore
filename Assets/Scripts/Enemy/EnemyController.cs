@@ -109,6 +109,18 @@ public class EnemyController : MonoBehaviour
         {
             animator.SetTrigger("Attack");
         }
+
+        PerfectBlock playerBlock = player.GetComponent<PerfectBlock>();
+
+        if (playerBlock != null)
+        {
+            playerBlock.OpenBlockWindow();
+        }
+
+        if (PerfectBlockUI.Instance != null)
+        {
+            PerfectBlockUI.Instance.ShowPrompt();
+        }
     }
 
     private void FacePlayer()

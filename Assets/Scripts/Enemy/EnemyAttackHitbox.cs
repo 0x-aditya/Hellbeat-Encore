@@ -3,11 +3,11 @@ using UnityEngine;
 public class EnemyAttackHitbox : MonoBehaviour
 {
     [Header("Attack Settings")]
-    public float attackRadius = 1.5f;
-    public int damage = 10;
+    [SerializeField] private float attackRadius = 1.5f;
+    [SerializeField] private int damage = 10;
 
-    [Header("Layers")]
-    public LayerMask playerLayer;
+    [Header("Player Layer")]
+    [SerializeField] private LayerMask playerLayer;
 
     public void DealDamage()
     {
@@ -21,17 +21,37 @@ public class EnemyAttackHitbox : MonoBehaviour
         {
             PlayerHealth playerHealth = hit.GetComponent<PlayerHealth>();
 
-            if (playerHealth != null)
+            if (playerHealth == null)
             {
-                playerHealth.TakeDamage(damage);
-                Debug.Log("Enemy hit player for " + damage + " damage!");
+                continue;
             }
+
+            PerfectBlock perfectBlock = hit.GetComponent<PerfectBlock>();
+
+            // Player successfully blocked the attack
+            if (perfectBlock != null && perfectBlock.IsBlockAvailable())
+            {
+                Debug.Log("ATTACK BLOCKED!");
+
+                perfectBlock.CloseBlockWindow();
+
+                return;
+            }
+
+            // Player did not block
+            playerHealth.TakeDamage(damage);
+
+            Debug.Log("Enemy hit player for " + damage + " damage!");
         }
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRadius);
+
+        Gizmos.DrawWireSphere(
+            transform.position,
+            attackRadius
+        );
     }
 }
