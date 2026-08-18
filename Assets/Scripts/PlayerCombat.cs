@@ -7,23 +7,22 @@ public class PlayerCombat : MonoBehaviour
 
     public bool isAttacking = false;
 
-    [SerializeField] private float attackCooldown = 0.25f;
+    [SerializeField] private float attackCooldown = 0.05f;
 
     private float lastAttackTime;
 
-    void Start()
+    private void Start()
     {
         animator = GetComponent<Animator>();
         movement = GetComponent<PlayerMovement>();
     }
 
-    void Update()
+    private void Update()
     {
         AttackInput();
     }
 
-
-    void AttackInput()
+    private void AttackInput()
     {
         if (isAttacking)
             return;
@@ -31,18 +30,14 @@ public class PlayerCombat : MonoBehaviour
         if (Time.time - lastAttackTime < attackCooldown)
             return;
 
-
         if (Input.GetMouseButtonDown(0))
         {
-            RegisterHit.Instance.RegisterHitEvent();
             animator.SetTrigger("PunchLeft");
             lastAttackTime = Time.time;
         }
 
-
         if (Input.GetMouseButtonDown(1))
         {
-            RegisterHit.Instance.RegisterHitEvent();
             animator.SetTrigger("PunchRight");
             lastAttackTime = Time.time;
         }
