@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class NoteTransporter : MonoBehaviour
 {
+    public static GameObject ClosestNoteToHitPoint { get; private set; }
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform hitPoint;
     [SerializeField] private Transform finalPoint;
@@ -23,10 +24,33 @@ public class NoteTransporter : MonoBehaviour
     {
         RhythmHandler.Instance.OnSpawn -= SpawnNote;
     }
+    
+    public void Update()
+    {
+        UpdateClosestNote();
+    }
+    
+    private void UpdateClosestNote()
+    {
+        float closestDistance = float.MaxValue;
+        GameObject closestNote = null;
+
+        foreach (GameObject note in _currentNotes)
+        {
+            if (!note) continue;
+
+            float distance = Vector2.Distance(hitPoint.position, note.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestNote = note;
+            }
+        }
+        ClosestNoteToHitPoint = closestNote;
+    }
 
     private void SpawnNote()
     {
-        print("Spawning note");
         GameObject newNote = Instantiate(notePrefab, spawnPoint.position, spawnPoint.rotation, canvasTransform);
         _currentNotes.Add(newNote);
 
@@ -38,7 +62,6 @@ public class NoteTransporter : MonoBehaviour
     {
         GameObject note = _currentNotes[noteIndex];
         StartCoroutine(MoveNoteToTarget(note, target.position, finalPoint.position, travelTime));
-        _currentNotes[noteIndex] = null;
     }
 
     private IEnumerator MoveNoteToTarget(GameObject note, Vector2 targetPosition, Vector3 finalDestination, float travelTime)
