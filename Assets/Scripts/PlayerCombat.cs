@@ -34,6 +34,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            RegisterHit.Instance.RegisterHitEvent();
             animator.SetTrigger("PunchLeft");
             lastAttackTime = Time.time;
         }
@@ -41,6 +42,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
+            RegisterHit.Instance.RegisterHitEvent();
             animator.SetTrigger("PunchRight");
             lastAttackTime = Time.time;
         }

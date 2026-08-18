@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{1884da7d-db2b-4e66-8558-a1e0ea01ce14}">
+		<property name="assetPath">
+			<value>bensound-highoctane.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>155.06285714285715</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2723621f-2469-40d1-b036-fdfb0bdff1e5}</destination>
+		</relationship>
+	</object>
+</objects>
