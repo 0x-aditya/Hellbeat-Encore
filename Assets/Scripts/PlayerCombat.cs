@@ -7,7 +7,7 @@ public class PlayerCombat : MonoBehaviour
 
     public bool isAttacking = false;
 
-    [SerializeField] private float attackCooldown = 0.05f;
+    [SerializeField] private float attackCooldown = 0.28f;
 
     private float lastAttackTime;
 
