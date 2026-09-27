@@ -383,7 +383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 175401674619448870, guid: 42271dc91364b20eca44c7e4e8dc2dd2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1237494896524912976, guid: 42271dc91364b20eca44c7e4e8dc2dd2, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -470,8 +470,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8374666164071453488, guid: 42271dc91364b20eca44c7e4e8dc2dd2, type: 3}
+      propertyPath: bpm
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374666164071453488, guid: 42271dc91364b20eca44c7e4e8dc2dd2, type: 3}
       propertyPath: startDelay
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374666164071453488, guid: 42271dc91364b20eca44c7e4e8dc2dd2, type: 3}
+      propertyPath: travelTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374666164071453488, guid: 42271dc91364b20eca44c7e4e8dc2dd2, type: 3}
+      propertyPath: latencyOffset
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8374666164071453488, guid: 42271dc91364b20eca44c7e4e8dc2dd2, type: 3}
       propertyPath: musicEvent.Path
@@ -2721,7 +2733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4738278548910766630, guid: 95dbb418a318dc6359c73f44003f801e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8963582107292709342, guid: 95dbb418a318dc6359c73f44003f801e, type: 3}
       propertyPath: m_LocalPosition.x

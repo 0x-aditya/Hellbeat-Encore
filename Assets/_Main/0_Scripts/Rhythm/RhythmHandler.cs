@@ -14,14 +14,16 @@ public class RhythmHandler : ScriptLibrary.Singletons.Singleton<RhythmHandler>
     public Transform hitPoint;
     public Transform spawnPoint;
 
+    [Tooltip("Seconds to compensate for audio/output latency.")]
+    public float latencyOffset = 0f;
+
     [SerializeField] private EventReference musicEvent;
 
     private EventInstance _musicInstance;
-    private float _songStartTime;
-    private float _nextBeatTime;
+    private float _nextBeatTime;   // in song-position seconds, not Time.time
     private float _secondsPerBeat;
+    private float _songLength;
     private bool _songStarted = false;
-    private float _songEndTime;
 
     private Queue<bool> _beatQueue = new Queue<bool>();
 
@@ -45,11 +47,9 @@ public class RhythmHandler : ScriptLibrary.Singletons.Singleton<RhythmHandler>
         _musicInstance.getDescription(out eventDescription);
         int lengthMs;
         eventDescription.getLength(out lengthMs);
-        float songLength = lengthMs / 1000f;
+        _songLength = lengthMs / 1000f;
 
-        _songStartTime = Time.time;
-        _nextBeatTime = _songStartTime;
-        _songEndTime = _songStartTime + songLength;
+        _nextBeatTime = 0f;
         _songStarted = true;
     }
 
@@ -90,9 +90,17 @@ public class RhythmHandler : ScriptLibrary.Singletons.Singleton<RhythmHandler>
     {
         if (!_songStarted) return;
 
-        if (Time.time >= _nextBeatTime - travelTime)
+        PLAYBACK_STATE playbackState;
+        _musicInstance.getPlaybackState(out playbackState);
+        if (playbackState == PLAYBACK_STATE.STOPPED) return;
+
+        int positionMs;
+        _musicInstance.getTimelinePosition(out positionMs);
+        float songPosition = (positionMs / 1000f) + latencyOffset;
+
+        if (songPosition >= _nextBeatTime - travelTime)
         {
-            if (Time.time < _songEndTime - 1.0f)
+            if (songPosition < _songLength - 1.0f)
             {
                 bool shouldPlayBeat = _beatQueue.Count <= 0 || _beatQueue.Dequeue();
 
@@ -106,7 +114,7 @@ public class RhythmHandler : ScriptLibrary.Singletons.Singleton<RhythmHandler>
             }
         }
 
-        if (Time.time >= _songEndTime)
+        if (songPosition >= _songLength)
         {
             _songStarted = false;
             _musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);

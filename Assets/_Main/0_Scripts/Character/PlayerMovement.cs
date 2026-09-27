@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : ScriptLibrary.Inputs.Vector2Input
 {
     [Header("Movement")]
     public float walkSpeed = 2f;
@@ -9,17 +9,14 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed = 10f;
     public float gravity = -9.81f;
 
-
-    [Header("Camera")]
-    public Transform cameraTransform;
-
-
     private CharacterController controller;
     private Animator animator;
 
     private Vector3 velocity;
 
     public bool canMove = true;
+
+    private Vector2 moveDirection => VectorInput;
 
 
     void Start()
@@ -39,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!canMove)
         {
-            animator.SetFloat("Speed", 0);
+            animator.SetFloat("XMovement", 0);
 
             if (controller.isGrounded && velocity.y < 0)
                 velocity.y = -2f;
@@ -91,8 +88,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Animation speed
         animator.SetFloat(
-            "XAxis",
-            (moveDirection.x/walkSpeed) 
+            "XMovement",
+            1
         );
         
 

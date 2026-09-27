@@ -1,32 +1,44 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class ThirdPersonMovement : MonoBehaviour
+public class ThirdPersonMovement : ScriptLibrary.Inputs.Vector2Input
 {
+    private static readonly int XMovement = Animator.StringToHash("XMovement");
+
     [Header("Movement")]
-    public float walkSpeed = 3f;
-    public float runSpeed = 6f;
-    public float rotationSpeed = 12f;
-    public float gravity = -9.81f;
-
+    [SerializeField] private float walkSpeed = 3f;
+    [SerializeField] private float runSpeed = 6f;
+    [SerializeField] private float rotationSpeed = 12f;
+    [SerializeField] private float gravity = -9.81f;
+    
     [Header("Camera")]
-    public Transform cameraTransform;
+    [SerializeField] private Transform _cameraTransform;
 
-    [Header("Animation")]
-    public Animator animator;
+    private Animator animator;
+    private CharacterController _controller;
+    private Vector3 _velocity;
+    private float Horizontal => VectorInput.x;
+    private float Vertical => VectorInput.y;
 
-    private CharacterController controller;
-    private Vector3 velocity;
-
-    public bool canMove = true;
+    [NonSerialized] public bool canMove = true;
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
-
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
+        _controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
+        
         if (animator == null)
         {
-            animator = GetComponent<Animator>();
+            Debug.LogError("No animator component found for: " + gameObject.name);
+        }
+
+        if (_cameraTransform == null)
+        {
+            Debug.LogError("No camera transform found for: " + gameObject.name);
         }
     }
 
@@ -39,17 +51,14 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         if (!canMove)
         {
-            animator.SetFloat("Speed", 0f);
+            animator.SetFloat(XMovement, 0f);
             ApplyGravity();
             return;
         }
 
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
         // Get the direction the camera is facing
-        Vector3 cameraForward = cameraTransform.forward;
-        Vector3 cameraRight = cameraTransform.right;
+        Vector3 cameraForward = _cameraTransform.forward;
+        Vector3 cameraRight = _cameraTransform.right;
 
         // Ignore the camera's vertical rotation
         cameraForward.y = 0f;
@@ -59,7 +68,7 @@ public class ThirdPersonMovement : MonoBehaviour
         cameraRight.Normalize();
 
         // Camera-relative movement
-        Vector3 moveDirection =cameraForward * vertical +cameraRight * horizontal;
+        Vector3 moveDirection =cameraForward * Vertical + cameraRight * Horizontal;
 
         if (moveDirection.magnitude > 1f)
         {
@@ -71,7 +80,7 @@ public class ThirdPersonMovement : MonoBehaviour
         float currentSpeed =isRunning ? runSpeed : walkSpeed;
 
         // Move
-        controller.Move(moveDirection *currentSpeed *Time.deltaTime);
+        _controller.Move(moveDirection *currentSpeed *Time.deltaTime);
 
         // Rotate character toward movement
         if (moveDirection.sqrMagnitude > 0.01f)
@@ -82,21 +91,21 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
         // Animation
-        animator.SetFloat("Speed",moveDirection.magnitude);
+        animator.SetFloat(XMovement,moveDirection.magnitude);
 
         ApplyGravity();
     }
 
     void ApplyGravity()
     {
-        if (controller.isGrounded && velocity.y < 0)
+        if (_controller.isGrounded && _velocity.y < 0)
         {
-            velocity.y = -2f;
+            _velocity.y = -2f;
         }
 
-        velocity.y += gravity * Time.deltaTime;
+        _velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(velocity * Time.deltaTime
+        _controller.Move(_velocity * Time.deltaTime
         );
     }
 }
