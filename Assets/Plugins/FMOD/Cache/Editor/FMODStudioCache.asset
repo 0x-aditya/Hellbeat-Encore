@@ -94,7 +94,7 @@ MonoBehaviour:
   Path: Assets/FMODAUDIO/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639226789119433984
+  lastModified: 639261168317093004
   FileSizes:
   - Name: Desktop
     Value: 874
@@ -147,7 +147,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -2644369253747422933}
   cacheVersion: 131860
-  cacheTime: 639226789119433984
+  cacheTime: 639261168317093004
   SerializableEventsDict:
   - key: event:/BG_Song
     index: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   Path: Assets/FMODAUDIO/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639226789119403356
+  lastModified: 639261168317082562
   FileSizes:
   - Name: Desktop
     Value: 2183104
