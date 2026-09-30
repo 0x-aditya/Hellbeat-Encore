@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: fcf27d29749a7f24496ebd2a2d9a041a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 136828
+  packageName: Retro 3D Shaders
+  packageVersion: 1.1
+  assetPath: Assets/OneManEscapePlan/Retro 3D Shaders/Scripts/SRSRenderSettings.cs
+  uploadId: 525807

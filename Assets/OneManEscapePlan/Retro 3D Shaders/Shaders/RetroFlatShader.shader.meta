@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 26a5652afd8ff7244940ecc03d1d7d29
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 136828
+  packageName: Retro 3D Shaders
+  packageVersion: 1.1
+  assetPath: Assets/OneManEscapePlan/Retro 3D Shaders/Shaders/RetroFlatShader.shader
+  uploadId: 525807

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b76aff7fbd81bc74ea21fa0d1a7d2e85
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 136828
+  packageName: Retro 3D Shaders
+  packageVersion: 1.1
+  assetPath: Assets/OneManEscapePlan/Retro 3D Shaders/Scripts/PixelCamera.cs
+  uploadId: 525807

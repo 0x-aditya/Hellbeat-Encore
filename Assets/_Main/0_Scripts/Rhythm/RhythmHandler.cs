@@ -104,7 +104,6 @@ public class RhythmHandler : ScriptLibrary.Singletons.Singleton<RhythmHandler>
             {
                 bool shouldPlayBeat = _beatQueue.Count <= 0 || _beatQueue.Dequeue();
 
-                print(shouldPlayBeat);
                 if (shouldPlayBeat)
                 {
                     OnSpawn?.Invoke();

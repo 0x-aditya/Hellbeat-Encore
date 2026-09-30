@@ -13,11 +13,9 @@ Shader "Custom/BlackOutline"
 
     SubShader
     {
-        // Self-contained: Pass 1 draws the body, Pass 2 draws the black outline shell.
-        // Just assign this shader as your object's one and only material.
+
         Tags { "RenderType"="Opaque" "Queue"="Geometry" "RenderPipeline"="UniversalPipeline" }
 
-        // ---------------- PASS 1: the object body ----------------
         Pass
         {
             Name "Body"
@@ -83,15 +81,10 @@ Shader "Custom/BlackOutline"
             ENDHLSL
         }
 
-        // ---------------- PASS 2: the black outline shell ----------------
         Pass
         {
             Name "Outline"
-            // Different LightMode tag from Pass 1 so URP actually draws both passes
-            // instead of only the first one it finds under a given tag.
             Tags { "LightMode"="SRPDefaultUnlit" }
-
-            // Cull Front + extrude along the normal = classic inverted-hull outline.
             Cull Front
             ZWrite On
             ZTest LEqual

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4819bc0746aa0ed4fb8b1bd4ccbbe92f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 136828
+  packageName: Retro 3D Shaders
+  packageVersion: 1.1
+  assetPath: Assets/OneManEscapePlan/Retro 3D Shaders/Demo/Materials/FlatshadeMat.mat
+  uploadId: 525807

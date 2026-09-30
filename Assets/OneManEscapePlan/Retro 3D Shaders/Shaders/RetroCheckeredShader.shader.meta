@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: dff5acffccc0a6347a3ff9187bbb4ca1
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 136828
+  packageName: Retro 3D Shaders
+  packageVersion: 1.1
+  assetPath: Assets/OneManEscapePlan/Retro 3D Shaders/Shaders/RetroCheckeredShader.shader
+  uploadId: 525807

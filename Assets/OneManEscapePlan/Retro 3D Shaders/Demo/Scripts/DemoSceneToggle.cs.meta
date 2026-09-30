@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2cfb86278fb03114487b745669cfdee5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 136828
+  packageName: Retro 3D Shaders
+  packageVersion: 1.1
+  assetPath: Assets/OneManEscapePlan/Retro 3D Shaders/Demo/Scripts/DemoSceneToggle.cs
+  uploadId: 525807

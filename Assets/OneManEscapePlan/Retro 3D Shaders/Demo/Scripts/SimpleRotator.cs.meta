@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d0a4f99f10505b6408e70d9f28d979bf
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 136828
+  packageName: Retro 3D Shaders
+  packageVersion: 1.1
+  assetPath: Assets/OneManEscapePlan/Retro 3D Shaders/Demo/Scripts/SimpleRotator.cs
+  uploadId: 525807
