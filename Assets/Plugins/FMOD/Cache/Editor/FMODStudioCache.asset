@@ -132,7 +132,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 2569414399005330954}
   cacheVersion: 131860
-  cacheTime: 639262905269612183
+  cacheTime: 639307934531974623
   SerializableEventsDict:
   - key: event:/HitSound
     index: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
   Path: Assets/FMODAUDIO/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639262905269578637
+  lastModified: 639307934531974623
   FileSizes:
   - Name: Desktop
     Value: 2202720
@@ -177,7 +177,7 @@ MonoBehaviour:
   Path: Assets/FMODAUDIO/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639262905269612183
+  lastModified: 639307934531974623
   FileSizes:
   - Name: Desktop
     Value: 952
